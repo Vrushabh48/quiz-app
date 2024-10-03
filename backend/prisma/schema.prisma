@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(uuid())
+  name        String
+  username    String       @unique
+  password    String
+  results     Result[]    
+  leaderboards Leaderboard[] 
+}
+
+model Admin {
+  id       String   @id @default(uuid())
+  name     String
+  username String   @unique
+  position String
+  password String
+  quizzes  Quiz[]   
+}
+
+model Quiz {
+  id          String      @id @default(uuid())
+  title       String
+  createdAt   DateTime    @default(now())
+  duration    Int         
+  endAt       DateTime    
+  status      Boolean     @default(true) 
+  results     Result[]    
+  adminId     String
+  admin       Admin       @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  leaderBoard Leaderboard[] 
+  questions   Question[] 
+}
+
+model Question {
+  id          String    @id @default(uuid())
+  text        String    
+  optionA     String    
+  optionB     String    
+  optionC     String    
+  optionD     String    
+  answerKey   String    
+  quizId      String
+  quiz        Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+model Result {
+  id        String   @id @default(uuid())
+  score     Int      
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizId    String?
+  quiz      Quiz?    @relation(fields: [quizId], references: [id], onDelete: SetNull)
+  attemptAt DateTime @default(now())
+}
+
+model Leaderboard {
+  id      String   @id @default(uuid())
+  quizId  String
+  quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  score   Int      
+}
