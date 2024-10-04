@@ -1,6 +1,22 @@
-import { Hono } from 'hono'
+import { PrismaClient } from '@prisma/client/edge'
+import { withAccelerate } from '@prisma/extension-accelerate'
+import { Hono } from "hono";
+import { sign,verify } from "hono/jwt";
+import { cors } from "hono/cors";
 
-const app = new Hono()
+export const app = new Hono<{
+  Bindings: {
+    DATABASE_URL: string,
+    JWT_SECRET: string
+  }
+}>();
+
+
+app.use(cors({
+  origin: '*', // Allows all origins, you can specify a specific origin if needed
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  allowHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+}));
 
 app.get('/', (c) => {
   return c.text('Hello Hono!')
@@ -8,6 +24,9 @@ app.get('/', (c) => {
 
 //user routes
 app.post('/api/user/signup', (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+}).$extends(withAccelerate())
   return c.text('Signup route');
 })
 

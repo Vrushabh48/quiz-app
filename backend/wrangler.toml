@@ -4,20 +4,4 @@ compatibility_date = "2024-10-03"
 compatibility_flags = [ "nodejs_compat" ]
 
 # [vars]
-# MY_VAR = "my-variable"
-
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
-
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "my-database"
-# database_id = ""
-
-# [ai]
-# binding = "AI"
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNGU1Yjc1N2MtOGQxOS00MDMzLWE2NGEtMzdiYjI5YWQwNGMwIiwidGVuYW50X2lkIjoiYzlhOTI0Y2UzYTYyMzA0YTc0OWI1NzhjMDkwNTBjMDRjNzJjYWE4ZTlmZWI2ODhmNDAxMTllNmMwZmVhNDk4ZCIsImludGVybmFsX3NlY3JldCI6IjA1MTEyODU2LWMyZDItNDYzMS1iYzhmLTQ5MWYyYmUwNzc1OCJ9.9oQpUoomKqne778N8gSofm4v6vCkszlE9QT1aLlfil0"
