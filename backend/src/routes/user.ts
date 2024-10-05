@@ -3,6 +3,7 @@ import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from "hono";
 import { sign, verify } from "hono/jwt";
 import { cors } from "hono/cors";
+import { auth } from 'hono/utils/basic-auth';
 
 export const userRouter = new Hono<{
     Bindings: {
@@ -19,6 +20,30 @@ userRouter.use(cors({
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization'],
 }));
+
+const authenticateJWT = async (c: any, next: any) => {
+  const jwt = c.req.header('Authorization');
+if (!jwt) {
+  c.status(401);
+  return c.json({ error: "unauthorized" });
+}
+
+  const token = jwt.split(' ')[1];
+const payload = await verify(token, c.env.JWT_SECRET);
+if (!payload) {
+  c.status(401);
+  return c.json({ error: "unauthorized" });
+}
+c.set('userId', String(payload.id));
+await next()
+  }
+
+
+  userRouter.use('/quiz/:id', authenticateJWT);
+  userRouter.use('/quizes', authenticateJWT);
+  userRouter.use('/submit/:id', authenticateJWT);
+  userRouter.use('/results', authenticateJWT);
+  userRouter.use('/quiz/leaderboard/:id', authenticateJWT);
 
 userRouter.post('/signup', async (c) => {
     const prisma = new PrismaClient({
