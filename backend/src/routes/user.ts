@@ -4,6 +4,7 @@ import { Hono } from "hono";
 import { sign, verify } from "hono/jwt";
 import { cors } from "hono/cors";
 import { auth } from 'hono/utils/basic-auth';
+import {usersignuptype, usersignintype, usersignup, usersignin} from '../../../common/src/index'
 
 export const userRouter = new Hono<{
   Bindings: {
@@ -50,6 +51,12 @@ userRouter.post('/signup', async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
   const body = await c.req.json();
+  const {success} = await usersignup.safeParse(body);
+  if(!success){
+    c.status(403);
+    return c.json({message: 'Invalid inputs'});
+  }
+
   try {
     const user = await prisma.user.create({
       data: {
@@ -72,6 +79,11 @@ userRouter.post('/signin', async (c) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
+  const {success} = await usersignin.safeParse(body);
+  if(!success){
+    c.status(403);
+    return c.json({message: 'Invalid inputs'});
+  }
 
   try {
     const user = await prisma.user.findUnique({
