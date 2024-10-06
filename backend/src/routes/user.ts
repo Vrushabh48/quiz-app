@@ -108,7 +108,6 @@ userRouter.post('/signin', async (c) => {
 })
 
 //attempting the quiz
-//attempting the quiz
 userRouter.post('/quiz/:id', async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
