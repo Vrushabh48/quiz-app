@@ -1,8 +1,35 @@
 import { useNavigate } from "react-router-dom"
 import { Navbar } from "../components/Navbar";
+import { useState } from "react";
+import axios from "axios";
 
 
 export const AdminSignin = () => {
+    const [username, setusername] = useState("");
+    const [password, setpassword] = useState("");
+
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('http://127.0.0.1:8787/api/admin/signin', {
+                username: username,
+                password: password
+            })
+            if(response.data.jwt){
+                localStorage.setItem("token", response.data.jwt);
+                alert('Signup Successful!')
+            }
+            else{
+                alert('No token received');
+            }
+        } catch (error) {
+            if(axios.isAxiosError(error)){
+                const errorMessage = error.response?.data?.error || "Signup failed. Please try again.";
+                alert(errorMessage);
+            }
+        }
+    };
     const navigate = useNavigate();
     return(
         <>
@@ -24,6 +51,7 @@ export const AdminSignin = () => {
               className="w-full px-4 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="text"
               placeholder="Enter your username"
+              onChange={(e) => setusername(e.target.value)}
               required
             />
           </div>
@@ -37,6 +65,7 @@ export const AdminSignin = () => {
               className="w-full px-4 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="password"
               placeholder="Enter your password"
+              onChange={(e) => setpassword(e.target.value)}
               required
             />
           </div>
@@ -45,6 +74,7 @@ export const AdminSignin = () => {
           <div className="flex items-center justify-between">
             <button
               type="submit"
+              onClick={handleClick}
               className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Sign In
