@@ -26,7 +26,7 @@ export const Navbar = () => {
                 </button>
                 <button
                     className="lg:text-lg text-sm font-mono hover:text-blue-400"
-                    onClick={() => navigate('/admin')}
+                    onClick={() => navigate('/admin/signup')}
                 >
                     For Admin
                 </button>
