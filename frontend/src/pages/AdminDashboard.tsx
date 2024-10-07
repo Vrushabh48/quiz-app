@@ -88,6 +88,7 @@ export const AdminDashboard = () => {
   const handleViewLeaderboard = async (quizId: string) => {
     const token = localStorage.getItem("token");
     setSelectedQuizId(quizId);
+    console.log(selectedQuizId);
     setShowLeaderboard(true);
     setLoadingLeaderboard(true);
     try {
