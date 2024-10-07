@@ -124,7 +124,7 @@ adminRouter.post('/create', async (c) => {
             }
         })
     }
-    return c.json({ message: "Quiz Created!" })
+    return c.json({ message: "Quiz Created!", quizid: quiz.id})
 })
 
 adminRouter.delete('/delete/:id', async (c) => {

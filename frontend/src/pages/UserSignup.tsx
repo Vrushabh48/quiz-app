@@ -22,6 +22,7 @@ export const UserSignup = () => {
             if(response.data.jwt){
                 localStorage.setItem("token", response.data.jwt);
                 alert('Signup Successful!')
+                navigate("/user/dashboard")
             }
             else{
                 alert('No token received');

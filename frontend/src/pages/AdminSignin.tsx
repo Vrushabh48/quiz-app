@@ -19,6 +19,7 @@ export const AdminSignin = () => {
             if(response.data.jwt){
                 localStorage.setItem("token", response.data.jwt);
                 alert('Signup Successful!')
+                navigate("/admin/dashboard")
             }
             else{
                 alert('No token received');

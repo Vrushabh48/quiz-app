@@ -9,6 +9,7 @@ export const AdminSignup = () => {
     const [username, setusername] = useState("");
     const [position, setposition] = useState("");
     const [password, setpassword] = useState("");
+    const navigate = useNavigate();
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -23,6 +24,7 @@ export const AdminSignup = () => {
             if(response.data.jwt){
                 localStorage.setItem("token", response.data.jwt);
                 alert('Signup Successful!')
+                navigate("/admin/dashboard")
             }
             else{
                 alert('No token received');
@@ -34,7 +36,7 @@ export const AdminSignup = () => {
             }
         }
     };
-    const navigate = useNavigate();
+    
     return(
         <>
         <Navbar />

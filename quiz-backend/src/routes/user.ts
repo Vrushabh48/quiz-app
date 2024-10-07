@@ -113,8 +113,9 @@ userRouter.post('/quiz/:id', async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const quizid = await c.req.param('id');
-  const userId = await c.get('userId');
+  const quizid =  c.req.param('id');
+  console.log(quizid);
+  const userId =  c.get('userId');
 
   const quiz = await prisma.quiz.findUnique({
     where: {

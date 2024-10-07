@@ -36,7 +36,7 @@ model Quiz {
   title       String
   createdAt   DateTime    @default(now())
   duration    Int         
-  endAt       DateTime    
+  endAt       String    
   status      Boolean     @default(true) 
   results     Result[]    
   adminId     String

@@ -7,6 +7,7 @@ import { useState } from "react";
 export const UserSignin = () => {
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
+    const navigate = useNavigate();
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -19,6 +20,7 @@ export const UserSignin = () => {
             if(response.data.jwt){
                 localStorage.setItem("token", response.data.jwt);
                 alert('SignIn Successful!')
+                navigate("/user/dashboard")
             }
             else{
                 alert('No token received');
@@ -30,7 +32,7 @@ export const UserSignin = () => {
             }
         }
     };
-    const navigate = useNavigate();
+    
     return(
         <>
         <Navbar />
