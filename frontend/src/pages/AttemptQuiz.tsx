@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Navbar } from "../components/Navbar";
-import { useNavigate, useParams } from "react-router-dom"; // For retrieving quiz ID from the URL
+import { useNavigate, useParams } from "react-router-dom";
 
 export const AttemptQuiz = () => {
-  const [quizData, setQuizData] = useState<any | null>(null); // Initialize as null
+  const [quizData, setQuizData] = useState<any | null>(null); 
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string }>({});
   const [savedOptions, setSavedOptions] = useState<{ [key: string]: string }>({});
-  const [isSaving, setIsSaving] = useState<{ [key: string]: boolean }>({}); // Track loading state for saving options
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); // Track loading state for submitting quiz
-  const { quizid } = useParams(); // Get quiz ID from the URL
+  const [isSaving, setIsSaving] = useState<{ [key: string]: boolean }>({}); 
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); 
+  const { quizid } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const AttemptQuiz = () => {
         }
         const response = await axios.post(
           `https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/quiz/${quizid}`,
-          {}, // No body required, as the quiz ID is in the URL
+          {}, 
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export const AttemptQuiz = () => {
         // Check if questions are received in the response
         if (response.data && response.data.questions) {
           console.log(response.data);
-          setQuizData(response.data); // Store full quiz response
+          setQuizData(response.data);
         } else {
           console.error("No questions found in the response");
         }
@@ -48,29 +48,28 @@ export const AttemptQuiz = () => {
   const handleSelectOption = (questionId: string, optionLetter: string) => {
     setSelectedOptions((prev) => ({
       ...prev,
-      [questionId]: optionLetter, // Store the letter of the option (A, B, C, D)
+      [questionId]: optionLetter,
     }));
   };
 
   const handleSaveOption = async (questionId: string) => {
-    setIsSaving((prev) => ({ ...prev, [questionId]: true })); // Set loading state for this question
+    setIsSaving((prev) => ({ ...prev, [questionId]: true }));
     try {
-      // Simulate save operation (you could add actual saving logic here if needed)
       setTimeout(() => {
         setSavedOptions((prev) => ({
           ...prev,
           [questionId]: selectedOptions[questionId],
         }));
-        setIsSaving((prev) => ({ ...prev, [questionId]: false })); // Clear loading state
-      }, 500); // Simulate a delay
+        setIsSaving((prev) => ({ ...prev, [questionId]: false }));
+      }, 500);
     } catch (error) {
       console.error("Error saving option:", error);
-      setIsSaving((prev) => ({ ...prev, [questionId]: false })); // Clear loading state on error
+      setIsSaving((prev) => ({ ...prev, [questionId]: false }));
     }
   };
 
   const handleSubmitQuiz = async () => {
-    setIsSubmitting(true); // Set loading state for submitting quiz
+    setIsSubmitting(true);
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -88,7 +87,7 @@ export const AttemptQuiz = () => {
       console.log(answers);
       const response = await axios.post(
         `https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/submit/${quizid}`,
-        { answers }, // Send answers object
+        { answers },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -102,7 +101,7 @@ export const AttemptQuiz = () => {
       console.error("Error submitting quiz:", error);
       alert("Failed to submit quiz.");
     } finally {
-      setIsSubmitting(false); // Clear loading state after submit attempt
+      setIsSubmitting(false);
     }
   };
 
@@ -126,9 +125,9 @@ export const AttemptQuiz = () => {
                       className={`border p-4 rounded-lg text-sm md:text-lg ${
                         selectedOptions[question.id] === optionLetter ? "bg-blue-200 border-blue-400" : "bg-gray-100"
                       }`}
-                      onClick={() => handleSelectOption(question.id, optionLetter)} // Pass the letter (A, B, C, D)
+                      onClick={() => handleSelectOption(question.id, optionLetter)}
                     >
-                      {question[`option${optionLetter}`]} {/* Display the option text */}
+                      {question[`option${optionLetter}`]}
                     </button>
                   ))}
                 </div>
@@ -136,7 +135,7 @@ export const AttemptQuiz = () => {
                 <button
                   className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base"
                   onClick={() => handleSaveOption(question.id)}
-                  disabled={isSaving[question.id]} // Disable button while saving
+                  disabled={isSaving[question.id]}
                 >
                   {isSaving[question.id] ? "Saving..." : "Save"}
                 </button>
@@ -149,7 +148,7 @@ export const AttemptQuiz = () => {
           <button
             className="mt-8 bg-green-600 text-white px-6 py-2 md:px-8 md:py-3 rounded-lg text-sm md:text-base"
             onClick={handleSubmitQuiz}
-            disabled={isSubmitting} // Disable submit button while submitting
+            disabled={isSubmitting}
           >
             {isSubmitting ? "Submitting..." : "Submit Quiz"}
           </button>

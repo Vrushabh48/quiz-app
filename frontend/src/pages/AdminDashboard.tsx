@@ -30,6 +30,7 @@ export const AdminDashboard = () => {
   const [selectedQuizId, setSelectedQuizId] = useState<string | null>(null);
   const [deletingQuizId, setDeletingQuizId] = useState<string | null>(null);
 
+  //useEffect hook to render quizes created by admin
   useEffect(() => {
     const fetchQuizzes = async () => {
       setLoading(true);
@@ -61,7 +62,7 @@ export const AdminDashboard = () => {
       console.log("No token found");
       return;
     }
-    setDeletingQuizId(quizId); // Set loading state for quiz deletion
+    setDeletingQuizId(quizId);
     try {
       await axios.put(
         `https://quiz-backend.vrushabhpatil4801.workers.dev/api/admin/quiz/end/${quizId}`,
@@ -76,11 +77,11 @@ export const AdminDashboard = () => {
         prevQuizzes.map((quiz) =>
           quiz.id === quizId ? { ...quiz, status: false } : quiz
         )
-      ); // Update the quiz status to show that it is deleted
+      );
     } catch (error) {
       console.error("Error ending quiz:", error);
     } finally {
-      setDeletingQuizId(null); // Reset loading state
+      setDeletingQuizId(null);
     }
   };
 

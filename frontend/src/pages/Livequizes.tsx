@@ -14,12 +14,12 @@ interface Quiz {
 
 export const Livequizes = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuizzes = async () => {
-      setLoading(true); // Set loading to true when fetching starts
+      setLoading(true);
       try {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -35,7 +35,7 @@ export const Livequizes = () => {
       } catch (error) {
         console.error("Error fetching quizzes:", error);
       } finally {
-        setLoading(false); // Set loading to false when fetching ends
+        setLoading(false);
       }
     };
 

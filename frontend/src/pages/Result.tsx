@@ -10,7 +10,7 @@ export const Result = () => {
   const [leaderboard, setLeaderboard] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
-  const [loadingLeaderboard, setLoadingLeaderboard] = useState(false); // Loading state for leaderboard
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,8 +57,7 @@ export const Result = () => {
       return;
     }
 
-    setLoadingLeaderboard(true); // Start loading state for leaderboard
-
+    setLoadingLeaderboard(true);
     try {
       const leaderboardResponse = await axios.get(
         `https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/quiz/leaderboard/${quizId}`,
@@ -74,7 +73,7 @@ export const Result = () => {
     } catch (error) {
       console.error("Error fetching leaderboard:", error);
     } finally {
-      setLoadingLeaderboard(false); // End loading state for leaderboard
+      setLoadingLeaderboard(false);
     }
   };
 
@@ -126,7 +125,7 @@ export const Result = () => {
           {showLeaderboard && (
             <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg mb-8">
               <h2 className="text-3xl font-semibold text-blue-600 mb-4">Leaderboard</h2>
-              {loadingLeaderboard ? ( // Show skeleton loader while fetching leaderboard
+              {loadingLeaderboard ? (
                 <div className="animate-pulse">
                   <div className="h-4 bg-gray-300 rounded mb-2"></div>
                   <div className="h-4 bg-gray-300 rounded mb-2"></div>

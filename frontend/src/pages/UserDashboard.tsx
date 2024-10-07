@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
 export const UserDashboard = () => {
-  const navigate = useNavigate(); // Hook to programmatically navigate
+  const navigate = useNavigate();
 
   return (
     <>
@@ -30,7 +30,7 @@ export const UserDashboard = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-white p-6 rounded-lg shadow-md flex items-center justify-center cursor-pointer"
-            onClick={() => navigate("/user/livequizes")} // Navigate to Live Quizzes
+            onClick={() => navigate("/user/livequizes")}
           >
             <div className="text-xl font-semibold text-blue-600">
               Get Live Quizzes
@@ -42,7 +42,7 @@ export const UserDashboard = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-white p-6 rounded-lg shadow-md flex items-center justify-center cursor-pointer"
-            onClick={() => navigate("/user/result")} // Navigate to Previous Results
+            onClick={() => navigate("/user/result")}
           >
             <div className="text-xl font-semibold text-green-600">
               Get Previous Results

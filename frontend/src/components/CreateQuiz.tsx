@@ -3,7 +3,7 @@ import { Navbar } from "./Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// Define types for question and the request body
+// types for question and the request body
 interface Question {
     text: string;
     optionA: string;
@@ -30,6 +30,7 @@ export const CreateQuiz = () => {
 
     const navigate = useNavigate();
 
+    //handling submit click
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const data: QuizData = {
@@ -55,7 +56,7 @@ export const CreateQuiz = () => {
             console.error("Error creating quiz:", error);
         }
     };
-
+    //handle change in question
     const handleQuestionChange = (index: number, field: keyof Question, value: string) => {
         const updatedQuestions = [...questions];
         updatedQuestions[index][field] = value;

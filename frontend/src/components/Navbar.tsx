@@ -5,15 +5,16 @@ export const Navbar = () => {
 
   // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove the token to log the user out
-    navigate("/"); // Redirect to login page after logout
+    localStorage.removeItem("token"); //removing token
+    navigate("/"); 
   };
 
-  const isLoggedIn = localStorage.getItem("token"); // Check if the user is logged in
+  //checking is user is logged in or not
+  const isLoggedIn = localStorage.getItem("token"); 
 
   return (
     <div className="flex justify-between items-center p-6 border-b-2">
-      {/* Brand Name */}
+      {/* Logo */}
       <div className="pl-4">
         <h1 className="text-3xl font-serif">Quizly</h1>
       </div>
@@ -39,7 +40,7 @@ export const Navbar = () => {
           For Admin
         </button>
 
-        {/* Display Logout Button if the user is logged in */}
+        {/*Logout Button only if the user is logged in */}
         {isLoggedIn && (
           <button
             className="lg:text-lg text-sm font-mono hover:text-red-400"
