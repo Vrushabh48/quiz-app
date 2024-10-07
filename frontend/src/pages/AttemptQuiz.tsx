@@ -21,7 +21,7 @@ export const AttemptQuiz = () => {
           return;
         }
         const response = await axios.post(
-          `http://127.0.0.1:8787/api/user/quiz/${quizid}`,
+          `https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/quiz/${quizid}`,
           {}, // No body required, as the quiz ID is in the URL
           {
             headers: {
@@ -87,7 +87,7 @@ export const AttemptQuiz = () => {
     try {
       console.log(answers);
       const response = await axios.post(
-        `http://127.0.0.1:8787/api/user/submit/${quizid}`,
+        `https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/submit/${quizid}`,
         { answers }, // Send answers object
         {
           headers: {

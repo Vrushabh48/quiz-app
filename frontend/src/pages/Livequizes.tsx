@@ -26,7 +26,7 @@ export const Livequizes = () => {
           console.log("No token Found");
           return;
         }
-        const response = await axios.get("http://127.0.0.1:8787/api/user/quizes", {
+        const response = await axios.get("https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/quizes", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

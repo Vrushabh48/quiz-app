@@ -15,7 +15,7 @@ export const AdminSignup = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://127.0.0.1:8787/api/admin/signup', {
+            const response = await axios.post('https://quiz-backend.vrushabhpatil4801.workers.dev/api/admin/signup', {
                 name: name,
                 username: username,
                 position: position,

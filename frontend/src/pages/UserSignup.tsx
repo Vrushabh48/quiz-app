@@ -14,7 +14,7 @@ export const UserSignup = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://127.0.0.1:8787/api/user/signup', {
+            const response = await axios.post('https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/signup', {
                 name: name,
                 username: username,
                 password: password

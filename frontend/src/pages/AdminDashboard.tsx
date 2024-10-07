@@ -39,7 +39,7 @@ export const AdminDashboard = () => {
           console.log("No token found");
           return;
         }
-        const response = await axios.get("http://127.0.0.1:8787/api/admin/dashboard", {
+        const response = await axios.get("https://quiz-backend.vrushabhpatil4801.workers.dev/api/admin/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -64,7 +64,7 @@ export const AdminDashboard = () => {
     setDeletingQuizId(quizId); // Set loading state for quiz deletion
     try {
       await axios.put(
-        `http://127.0.0.1:8787/api/admin/quiz/end/${quizId}`,
+        `https://quiz-backend.vrushabhpatil4801.workers.dev/api/admin/quiz/end/${quizId}`,
         {},
         {
           headers: {
@@ -91,7 +91,7 @@ export const AdminDashboard = () => {
     setLoadingLeaderboard(true);
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8787/api/admin/quiz/leaderboard/${quizId}`,
+        `https://quiz-backend.vrushabhpatil4801.workers.dev/api/admin/quiz/leaderboard/${quizId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

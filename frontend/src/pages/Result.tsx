@@ -24,7 +24,7 @@ export const Result = () => {
 
       try {
         const resultResponse = await axios.get(
-          `http://127.0.0.1:8787/api/user/results`,
+          `https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/results`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ export const Result = () => {
 
     try {
       const leaderboardResponse = await axios.get(
-        `http://127.0.0.1:8787/api/user/quiz/leaderboard/${quizId}`,
+        `https://quiz-backend.vrushabhpatil4801.workers.dev/api/user/quiz/leaderboard/${quizId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

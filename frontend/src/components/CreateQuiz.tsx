@@ -43,7 +43,7 @@ export const CreateQuiz = () => {
             return;
         }
         try {
-            const response = await axios.post("http://127.0.0.1:8787/api/admin/create", data, {
+            const response = await axios.post("https://quiz-backend.vrushabhpatil4801.workers.dev/api/admin/create", data, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
